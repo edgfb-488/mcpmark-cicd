@@ -1,5 +1,5 @@
 function example() {
-  const unusedVar = "test"
-  console.log("Hello world")
-  return 42
+  // const unusedVar = 'test';
+  console.warn('Hello world');
+  return 42;
 }
