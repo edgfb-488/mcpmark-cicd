@@ -8,9 +8,6 @@ jobs:
   issue-triage:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Run issue triage
         uses: actions/github-script@v7
         with:
@@ -110,9 +107,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [issue-triage]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Run epic task breakdown
         uses: actions/github-script@v7
         with:
@@ -171,9 +165,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [issue-triage]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Run auto-response
         uses: actions/github-script@v7
         with:
