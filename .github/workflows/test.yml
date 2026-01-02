@@ -1,0 +1,39 @@
+name: Test Workflow
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add test label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issueNumber = context.issue.number;
+            
+            // Create test label if not exists
+            try {
+              await github.rest.issues.getLabel({ owner, repo, name: "test" });
+            } catch (error) {
+              if (error.status === 404) {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: "test",
+                  color: "ffffff",
+                  description: "Test label"
+                });
+              }
+            }
+            
+            // Add test label
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: issueNumber,
+              labels: ["test"]
+            });
