@@ -1,0 +1,22 @@
+name: Create Label Manually
+
+on:
+  push:
+    branches: [create-label-manual]
+
+jobs:
+  create-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create bug label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            await github.rest.issues.createLabel({
+              owner,
+              repo,
+              name: "bug",
+              color: "d73a4a",
+              description: "Something isn't working"
+            });
